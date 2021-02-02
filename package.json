@@ -1,6 +1,6 @@
 {
   "name": "aptitu.de",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Full-stack RESTful web-app for monitoring and analyzing Apple Health data",
   "main": "src/index.js",
   "repository": {
