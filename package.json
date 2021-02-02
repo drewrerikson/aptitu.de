@@ -1,0 +1,29 @@
+{
+  "name": "aptitu.de",
+  "version": "1.0.0",
+  "description": "Full-stack RESTful web-app for monitoring and analyzing Apple Health data",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drewrerikson/aptitu.de.git"
+  },
+  "author": "Drew Erikson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drewrerikson/aptitu.de/issues"
+  },
+  "homepage": "https://github.com/drewrerikson/aptitu.de#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.4.1",
+    "mongodb": "^3.6.3",
+    "mongodb-memory-server": "^6.9.3",
+    "morgan": "^1.10.0",
+    "request-stats": "^3.0.0"
+  }
+}
