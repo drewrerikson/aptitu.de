@@ -2,8 +2,8 @@ const {getDatabase} = require('./mongo');
 
 async function addData(entry) {
   const database = await getDatabase();
-  if (Array.isArray(entry['data']) && entry['data'].length > 0) {
-    const result = await database.collection(entry['name']).insertMany(entry['data']);
+  if (Array.isArray(entry.data) && entry.data.length > 0) {
+    const result = await database.collection(entry.name).insertMany(entry.data);
     return result.insertedCount;
   }
 }

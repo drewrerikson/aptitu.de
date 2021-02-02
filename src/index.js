@@ -23,15 +23,15 @@ app.get('/:table', async (req, res) => {
 
 // from export
 app.post("/import", async (req, res) => {
-  const data = req.body['data'];
+  const data = req.body.data;
   data.forEach((datum, ind) => {
     addData(datum);
   });
   res.send({message: `Data added to DB.`})
 });
 
-app.delete('/:id', async (req, res) => {
-  await deleteData(req.params.id);
+app.delete('/:table/:id', async (req, res) => {
+  await deleteData(req.params.table, req.params.id);
   res.send({ message: `ID ${req.params.id} removed from DB.` });
 });
 
