@@ -6,8 +6,10 @@ const helmet = require("helmet");
 const cors = require("cors");
 const {startDatabase} = require('./db/mongo');
 const {addData, getData, deleteData} = require('./db/healthdata');
+const requestStats = require('request-stats');
 
 const app = express();
+const stats = requestStats(app);
 
 app.use(helmet());
 app.use(bodyParser.json({limit: '50mb', extended: true}));
