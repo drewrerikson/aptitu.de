@@ -6,23 +6,23 @@ const helmet = require("helmet");
 const cors = require("cors");
 const {startDatabase} = require('./db/mongo');
 const {addData, getData, deleteData} = require('./db/healthdata');
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
+// const jwt = require('express-jwt');
+// const jwksRsa = require('jwks-rsa');
+//
+// const checkJwt = jwt({
+//   secret: jwksRsa.expressJwtSecret({
+//     cache: true,
+//     rateLimit: true,
+//     jwksRequestsPerMinute: 5,
+//     jwksUri: `https://glacier.us.auth0.com/.well-known/jwks.json`
+//   }),
+//
+//   audience: 'https://glacier.us.auth0.com/api/v2/',
+//   issuer: `https://glacier.us.auth0.com/`,
+//   algorithms: ['RS256']
+// });
 
 const app = express();
-
-const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://glacier.us.auth0.com/.well-known/jwks.json`
-  }),
-
-  audience: 'https://glacier.us.auth0.com/api/v2/',
-  issuer: `https://glacier.us.auth0.com/`,
-  algorithms: ['RS256']
-});
 
 app.use(helmet());
 app.use(bodyParser.json({limit: '50mb', extended: true}));
@@ -32,19 +32,26 @@ app.use(morgan('combined'));
 startDatabase();
 
 // to webpage
-app.get('/:table', async (req, res) => {
+app.get('/table/:table', async (req, res) => {
   res.send(await getData(req.params.table));
 });
 
-app.use(checkJwt)
+app.get('/test', async (req, res) => {
+  res.send("Hello!");
+});
 
 // from export
 app.post("/import", async (req, res) => {
-  const data = req.body.data;
-  data.forEach((datum, ind) => {
-    addData(datum);
-  });
-  res.send({message: `Data added to DB.`})
+  if (req.body.data !== undefined) {
+    const data = req.body.data;
+    data.forEach((datum, ind) => {
+      addData(datum);
+    });
+    res.send({message: `Data added to DB.`});
+    console.log("Successful import:");
+  } else {
+    console.log("Empty request.");
+  }
 });
 
 app.delete('/:table/:id', async (req, res) => {
