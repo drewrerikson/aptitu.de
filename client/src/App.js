@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Sidebar from './components/Sidebar'
+import Main from './components/Main'
 
 class App extends Component {
 
@@ -15,17 +16,17 @@ class App extends Component {
           .then(res => this.setState({ apiResponse: res }));
   }
 
-  componentWillMount() {
+  componentDidMount() {
       this.callAPI();
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p className="App-intro">{this.state.apiResponse}</p>
-          </header>
+      <div className="wrapper">
+        <Router>
+          <Sidebar />
+          <Route path='/' component={Main} />
+        </Router>
       </div>
     );
   }

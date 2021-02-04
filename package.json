@@ -1,6 +1,6 @@
 {
   "name": "aptitu.de",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Full-stack RESTful web-app for monitoring and analyzing Apple Health data",
   "main": "src/index.js",
   "repository": {
@@ -16,6 +16,7 @@
   "dependencies": {
     "auth0-js": "^9.14.3",
     "body-parser": "^1.19.0",
+    "chartist": "^0.11.4",
     "cors": "^2.8.5",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
@@ -24,6 +25,8 @@
     "jwks-rsa": "^1.12.2",
     "mongodb": "^3.6.3",
     "mongodb-memory-server": "^6.9.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "react-chartist": "^0.14.4",
+    "react-router-dom": "^5.2.0"
   }
 }

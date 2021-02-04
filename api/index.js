@@ -6,21 +6,6 @@ const helmet = require("helmet");
 const cors = require("cors");
 const {startDatabase} = require('./db/mongo');
 const {addData, getData, deleteData} = require('./db/healthdata');
-// const jwt = require('express-jwt');
-// const jwksRsa = require('jwks-rsa');
-//
-// const checkJwt = jwt({
-//   secret: jwksRsa.expressJwtSecret({
-//     cache: true,
-//     rateLimit: true,
-//     jwksRequestsPerMinute: 5,
-//     jwksUri: `https://glacier.us.auth0.com/.well-known/jwks.json`
-//   }),
-//
-//   audience: 'https://glacier.us.auth0.com/api/v2/',
-//   issuer: `https://glacier.us.auth0.com/`,
-//   algorithms: ['RS256']
-// });
 
 const app = express();
 
@@ -34,10 +19,6 @@ startDatabase();
 // to webpage
 app.get('/table/:table', async (req, res) => {
   res.send(await getData(req.params.table));
-});
-
-app.get('/test', async (req, res) => {
-  res.send("Hello!");
 });
 
 // from export
