@@ -1,4 +1,7 @@
 # aptitu.de
+
+![Cover Photo](https://raw.githubusercontent.com/drewrerikson/aptitu.de/main/cover.png)
+
 ### Full-stack RESTful personal webapp for monitoring and analyzing Apple Health data. 
 Aptitu.de is a full-stack personal project whose goal it is to pull real-time data from my Apple Watch and Apple Health endpoints to display them in a dynamic and intuitive webapp. Using Apple App Store app 'Health Auto Export', ~90 datasets of personal health data are posted via REST API to a locally run server. Data is stored using MongoDB and then is rendered and displayed using React, using Chartist for data visualization.
 
