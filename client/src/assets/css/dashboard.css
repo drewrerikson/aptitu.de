@@ -826,3 +826,43 @@
 .documentation .dropdown .dropdown-menu.show {
     transform: translate3d(0, 39px, 0) !important;
 }
+
+.ct-series-a .ct-bar {
+  /* Colour of your bars */
+  /* stroke: red; */
+  /* The width of your bars */
+  stroke-width: 20px;
+  /* Yes! Dashed bars! */
+  /* stroke-dasharray: 20px; */
+  /* Maybe you like round corners on your bars? */
+  /* stroke-linecap: round; */
+}
+
+/* Use this selector to override the line style on a given series */
+.ct-series-a .ct-line {
+  /* Set the colour of this series line */
+  stroke: red;
+  /* Control the thikness of your lines */
+  /* stroke-width: 5px; */
+  /* Create a dashed line with a pattern */
+  /* stroke-dasharray: 10px 20px; */
+}
+
+.ct-series-a .ct-area {
+  /* Set the colour of this series line */
+  fill: rgba(255, 0, 0, 0.3);
+  /* Control the thikness of your lines */
+  /* stroke-width: 5px; */
+  /* Create a dashed line with a pattern */
+  /* stroke-dasharray: 10px 20px; */
+}
+
+/* This selector overrides the points style on line charts. Points on line charts are actually just very short strokes. This allows you to customize even the point size in CSS */
+.ct-series-a .ct-point {
+  /* Colour of your points */
+  stroke: red;
+  /* Size of your points */
+  /* stroke-width: 20px; */
+  /* Make your points appear as squares */
+  /* stroke-linecap: square; */
+}

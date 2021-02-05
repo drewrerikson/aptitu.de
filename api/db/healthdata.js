@@ -4,7 +4,7 @@ async function addData(entry) {
   const database = await getDatabase();
   entry.data.forEach(datum =>
     database.collection(entry.name).updateOne(
-      {date: datum.date},
+      {ts: Date.parse(datum.date)},
       {$set: {datum}},
       {upsert: true}
     )
@@ -14,7 +14,7 @@ async function addData(entry) {
 
 async function getData(table) {
   const database = await getDatabase();
-  return await database.collection(table).find({}).toArray();
+  return await database.collection(table).find({}).sort({ "ts" : 1 }).toArray();
 }
 
 async function deleteData(table, id) {
