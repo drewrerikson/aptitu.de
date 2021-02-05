@@ -50,8 +50,8 @@ class Dashboard extends Component {
       series: [this.state.vo2.map(a => a.datum.qty)]
     }
     let dataSleep = {
-      labels: this.state.sleep.map(a => new Date(a.ts).getMonth() + 1 + '-' + new Date(a.ts).getDate()),
-      series: [this.state.sleep.map(a => a.datum.inBed), this.state.sleep.map(a => a.datum.asleep)]
+      labels: this.state.sleep.map(a => DAYS[(new Date(a.ts)).getDay()]),
+      series: [this.state.sleep.map(a => a.datum.asleep), this.state.sleep.map(a => a.datum.inBed -  a.datum.asleep)]
     }
     return [dataStand, dataHR, dataVO2, dataSleep];
   }
@@ -62,19 +62,18 @@ class Dashboard extends Component {
       <div className="content">
         <div className="container-fluid">
           <div className="row">
-
             <div className="col-md-4">
               <div className="card ">
                 <div className="card-header ">
-                  <h4 className="card-title">Stand Statistics</h4>
-                  <p className="card-category">Hours in a day stood</p>
+                  <h4 className="card-title">Stand Hours</h4>
+                  <p className="card-category">Hours of each day stood for 1 minute during.</p>
                 </div>
                 <div className="card-body ">
                   <ChartistGraph data={dataStand} type="Bar" />
                   <hr />
                   <div className="card-footer ">
                     <div className="stats">
-                      <i className="fa fa-history"></i> Last data recieved at { this.state.lastUpdate.toLocaleString() }.
+                      <i className="fa fa-history"></i>Last data recieved at { this.state.lastUpdate.toLocaleString() }.
                     </div>
                   </div>
                 </div>
@@ -89,15 +88,10 @@ class Dashboard extends Component {
                 <div className="card-body ">
                   <ChartistGraph data={dataHR} options={{showArea: true}} type="Line" />
                 </div>
-                <div className="card-footer "> {/*
-                  <div className="legend">
-                    <i className="fa fa-circle text-info"></i> Open
-                    <i className="fa fa-circle text-danger"></i> Click
-                    <i className="fa fa-circle text-warning"></i> Click Second Time
-                </div> */}
+                <div className="card-footer ">
                   <hr />
                   <div className="stats">
-                    <i className="fa fa-history"></i> Last data recieved at { this.state.lastUpdate.toLocaleString() }.
+                    <i className="fa fa-history"></i>Last data recieved at { this.state.lastUpdate.toLocaleString() }.
                   </div>
                 </div>
               </div>
@@ -126,9 +120,13 @@ class Dashboard extends Component {
                   <p className="card-category">Compare time in-bed versus time-asleep on a nightly basis.</p>
                 </div>
                 <div className="card-body ">
-                  <ChartistGraph data={dataSleep} type="Bar" />
+                  <ChartistGraph data={dataSleep}  options={{stackBars: true}} type="Bar" />
                 </div>
                 <div className="card-footer ">
+                  <div className="legend">
+                    <i className="fa fa-circle asleep"></i> Asleep
+                    <i className="fa fa-circle inbed"></i> In Bed
+                  </div>
                   <hr />
                   <div className="stats">
                     <i className="fa fa-history"></i> Last data recieved at { this.state.lastUpdate.toLocaleString() }.

@@ -17,15 +17,7 @@ async function getData(table) {
   return await database.collection(table).find({}).sort({ "ts" : 1 }).toArray();
 }
 
-async function deleteData(table, id) {
-  const database = await getDatabase();
-  await database.collection(table).deleteOne({
-    _id: new ObjectID(id),
-  });
-}
-
 module.exports = {
   addData,
   getData,
-  deleteData
 };

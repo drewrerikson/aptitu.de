@@ -8,6 +8,7 @@ const {startDatabase} = require('./db/mongo');
 const {addData, getData, deleteData} = require('./db/healthdata');
 
 const app = express();
+const PORT = process.argv[2] || 5000;
 
 app.use(helmet());
 app.use(bodyParser.json({limit: '50mb', extended: true}));
@@ -16,30 +17,22 @@ app.use(morgan('combined'));
 
 startDatabase();
 
-// to webpage
 app.get('/table/:table', async (req, res) => {
   res.send(await getData(req.params.table));
 });
 
-// from export
 app.post("/import", async (req, res) => {
   if (req.body.data !== undefined) {
     const data = req.body.data;
     data.forEach((datum, ind) => {
       addData(datum);
     });
-    res.send({message: `Data added to DB.`});
-    console.log("Successful import:");
+    res.send({message: `200 OK: Data added to DB.`});
   } else {
-    console.log("Empty request.");
+    console.log("Empty data; not imported.");
   }
 });
 
-app.delete('/:table/:id', async (req, res) => {
-  await deleteData(req.params.table, req.params.id);
-  res.send({ message: `ID ${req.params.id} removed from DB.` });
-});
-
-app.listen(5000, () => {
-  console.log(`Server is listening on port 5000.`);
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}.`);
 });
